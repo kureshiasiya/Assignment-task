@@ -72,7 +72,7 @@ const CategoryMenu = () => {
     <div className="category-menu">
       <div className="fixed-navigation" ref={fixedNavRef}>
         <div className="top-items">
-          <span className="top-item">Services &gt;</span>
+          <span className="top-item service-active">Services &gt;</span>
           <span className="top-item">Professional &gt;</span>
           <span className="top-item">Time &gt;</span>
           <span className="top-item">Confirm &gt;</span>
