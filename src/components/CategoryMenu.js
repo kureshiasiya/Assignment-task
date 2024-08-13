@@ -12,98 +12,111 @@ const categories = [
   "Treatments",
 ];
 
-const subcategories = ["Hircut", "Subcategory 2", "Subcategory 3"];
+const subcategories = {
+  Featured: ["Haircut", "Styling", "Color"],
+  Haircutting: ["Men's Cut", "Women's Cut", "Children's Cut"],
+  Styling: ["Blowout", "Updo", "Braiding"],
+  // Add subcategories for other categories as needed
+};
 
 const CategoryMenu = () => {
-  const [activeCategory, setActiveCategory] = useState(0);
-  const sectionRefs = useRef([]);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const categoryContainerRef = useRef(null);
+  const sectionRefs = useRef({});
+  const fixedNavRef = useRef(null);
 
-  const handleCategoryClick = (index) => {
-    setActiveCategory(index);
-    sectionRefs.current[index].scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleScroll = () => {
-    sectionRefs.current.forEach((section, index) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 50 && rect.bottom >= 50) {
-        setActiveCategory(index);
-      }
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+    const navHeight = fixedNavRef.current
+      ? fixedNavRef.current.offsetHeight
+      : 0;
+    const targetPosition = sectionRefs.current[category].offsetTop - navHeight;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth",
     });
   };
 
+  const scrollCategoriesRight = () => {
+    if (categoryContainerRef.current) {
+      categoryContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const navHeight = fixedNavRef.current
+        ? fixedNavRef.current.offsetHeight
+        : 0;
+
+      for (let category of categories) {
+        const section = sectionRefs.current[category];
+        if (section) {
+          const sectionTop = section.offsetTop - navHeight;
+          const sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            setActiveCategory(category);
+            break;
+          }
+        }
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollCategoriesRight = () => {
-    const container = document.querySelector(".category-container");
-    container.scrollBy({ left: 200, behavior: "smooth" });
-  };
-
   return (
-    <div>
-      {/* Top Items */}
-      <div className="top-items">
-        <span className="top-item active">
-          Services <span className="arrow">&gt;</span>
-        </span>
-        <span className="top-item">
-          Professional <span className="arrow">&gt;</span>
-        </span>
-        <span className="top-item">
-          Time <span className="arrow">&gt;</span>
-        </span>
-        <span className="top-item">
-          Confirm <span className="arrow">&gt;</span>
-        </span>
-      </div>
+    <div className="category-menu">
+      <div className="fixed-navigation" ref={fixedNavRef}>
+        <div className="top-items">
+          <span className="top-item">Services &gt;</span>
+          <span className="top-item">Professional &gt;</span>
+          <span className="top-item">Time &gt;</span>
+          <span className="top-item">Confirm &gt;</span>
+        </div>
 
-      {/* Bold "Select Services" Text */}
-      <div className="select-services">
-        <strong>Select Services</strong>
-      </div>
+        <h2 className="select-services">Select Services</h2>
 
-      {/* Category Menu Section */}
-      <div className="category-container">
-        {categories.map((category, index) => (
-          <button
-            key={index}
-            className={`category-item ${
-              activeCategory === index ? "active" : ""
-            }`}
-            onClick={() => handleCategoryClick(index)}
-          >
-            {category}
+        <div className="category-container-wrapper">
+          <div className="category-container" ref={categoryContainerRef}>
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                className={`category-item ${
+                  activeCategory === category ? "active" : ""
+                }`}
+                onClick={() => handleCategoryClick(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <button className="scroll-arrow" onClick={scrollCategoriesRight}>
+            ➔
           </button>
-        ))}
-        <div className="arrow-right" onClick={scrollCategoriesRight}>
-          ➔
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="content">
-        {categories.map((category, index) => (
-          <section key={index} ref={(el) => (sectionRefs.current[index] = el)}>
-            {/* <h2>{category}</h2>
-            <p>Content for {category}</p> */}
-
-            {/* Display subcategories for "Featured" */}
-            {category === "Featured" && (
-              <div className="featured-section">
-                <div className="featured-title">Featured</div>
-                <div className="subcategory-boxes">
-                  {subcategories.map((sub, idx) => (
-                    <div key={idx} className="subcategory-box">
-                      {sub}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </section>
+        {categories.map((category) => (
+          <div
+            key={category}
+            ref={(el) => (sectionRefs.current[category] = el)}
+            className="category-section"
+          >
+            <h2>{category}</h2>
+            <div className="subcategories">
+              {subcategories[category] &&
+                subcategories[category].map((sub, idx) => (
+                  <div key={idx} className="subcategory-item">
+                    {sub}
+                  </div>
+                ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>
