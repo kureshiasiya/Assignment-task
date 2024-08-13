@@ -63,12 +63,13 @@
   padding: 10px 20px;
   margin-right: 10px;
   border: none;
-  background-color: #f0f0f0;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.3s;
   font-size: 14px;
   border-radius: 25px;
+  background: none;
+  font-weight: bold;
 }
 
 .category-item.active {
@@ -83,12 +84,14 @@
 
 .scroll-arrow {
   /* background: #f0f0f0; */
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 4px;
   padding: 5px 10px;
   cursor: pointer;
   font-size: 18px;
   user-select: none; /* Prevents text selection on click */
+  background: none;
+  border: none;
 }
 
 .scroll-left {
@@ -98,6 +101,10 @@
 .scroll-right {
   margin-left: 10px; /* Space between right button and category container */
 }
+.scroll-arrow:hover {
+  background-color: #f0f0f0;
+  border-radius: 30%;
+}
 
 .content {
   padding: 20px;
@@ -105,18 +112,65 @@
 }
 
 .category-section {
-  min-height: 300px; /* Adjust as needed */
+  min-height: 500px;
 }
 
 .subcategories {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .subcategory-item {
-  background-color: #f0f0f0;
-  padding: 10px;
+  /* background-color: #f0f0f0; */
   border-radius: 5px;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 140px;
+  border: 1px black;
+}
+
+/* Specific styles for Featured category */
+.category-section[data-category="Featured"] .subcategories {
+  gap: 20px;
+}
+
+.category-section[data-category="Featured"] .subcategory-item {
+  margin-bottom: 20px;
+}
+.subcategory-heading {
+  color: #000; /* Black color for the heading */
+}
+
+.subcategory-description {
+  color: #808080; /* Gray color for the description */
+}
+.subcategory-description1 {
+  color: #808080;
+}
+.subcategory-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid gray;
+}
+
+.subcategory-content {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.add-button {
+  /* background-color: #your-color; */
+  color: black;
+  border: none;
+  border-radius: 20%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
 }

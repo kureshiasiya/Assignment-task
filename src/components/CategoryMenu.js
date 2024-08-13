@@ -13,14 +13,124 @@ const categories = [
 ];
 
 const subcategories = {
-  Featured: ["Haircut", "Styling", "Color"],
-  Haircutting: ["Men's Cut", "Women's Cut", "Children's Cut"],
-  Styling: ["Blowout", "Updo", "Braiding"],
-  // Add subcategories for other categories as needed
+  Featured: {
+    heading: "",
+    items: [
+      {
+        heading: "Haircut",
+        description1: "1 hr, 30 mins - 2 hrs",
+        description:
+          "We do not have pricing for trims. All haircuts are full services that include a wash and style; either a wash and go or a silk press. Specify with stylist upon arrival.",
+        price: "from $90",
+      },
+      {
+        heading: "Deep Condition (Standard)",
+        description1: "15 mins",
+        description:
+          "This is an add on deep conditioning treatment service for clients who need to restore moisture back into their hair. MUST book styling or haircut service to follow. Appointments made without a styling service will be cancelled.",
+        price: "$25",
+      },
+      {
+        heading: "Blow Dry/Silk Press",
+        description1: " 1hr-2hrs",
+        description:
+          "Please do NOT apply castor oil or coconut oil to hair before service.If you have NOT had a professional trim/haircut in the last 3 months, you must book a haircut service.",
+        price: "$85",
+      },
+      {
+        heading: "Root Touch-Up (Single Process)",
+        description1: "1 hr",
+        description:
+          "For RETURNING client, and anyone needing a root touch up. With less that 2 inches of root.MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service).",
+        price: "$125",
+      },
+      {
+        heading: "Wash & Go - Curly Style",
+        description1: "1 hr,25 mins",
+        price: "$60",
+      },
+      {
+        heading: "Haircut Short Tapered",
+        description1: "1 hr- 2hrs",
+        description:
+          "A taper is a cut that leaves your hair long at the top and short on the sides. Hair gradually gets shorter as you move down the back and sides of your head. THIS IS NOT A BARBER HAIRCUT. We do not do low fades or tight fades. This is a soft short haircut.",
+        price: "$130",
+      },
+    ],
+  },
+  Haircutting: {
+    heading:
+      "We do not have pricing for trims. All haircuts are full services that include a wash and style; either a wash and go or a silk press. Specify with stylist upon arrival.",
+    items: [
+      {
+        heading: "A Bob Haircut",
+        description1: "1 hr - 2 hrs",
+        description:
+          "A bob cut, is a short to medium length haircut, in which the hair is typically cut straight around the head at approximately jaw level, and no longer than shoulder-length.A bob cut is typically done on straight hair, but can be worn curly.",
+        price: "from $110",
+      },
+      {
+        heading: "Haircut",
+        description1: "1 hr, 30 mins - 2 hrs",
+        description:
+          "We do not have pricing for trims. All haircuts are full services that include a wash and style; either a wash and go or a silk press. Specify with stylist upon arrival.",
+        price: "from $90",
+      },
+      {
+        heading: "Haircut Short Tapered",
+        description1: "1 hr, 30 mins - 2 hrs",
+        description:
+          "A taper is a cut that leaves your hair long at the top and short on the sides. Hair gradually gets shorter as you move down the back and sides of your head. THIS IS NOT A BARBER HAIRCUT. We do not do low fades or tight fades. This is a soft short haircut.The inished style is a wash-and-go This is NOT for wearing your hair straight.",
+        price: "from $130",
+      },
+    ],
+  },
+  Styling: {
+    heading: "",
+    items: [
+      {
+        heading: "Blow Dry/Silk Press",
+        description1: "1hr-2hrs",
+        description:
+          "Please do NOT apply castor oil or coconut oil to hair before service.If you have NOT had a professional trim/haircut in the last 3 months, you must book a haircut service.If you would like a trim/haircut, please book our hair cut service with a stylist. ",
+        price: "$85",
+      },
+      {
+        heading: "Half Up Half Down Ponytail",
+        description1: "2 hrs",
+        description: "Hair is not included. ",
+        price: "$225",
+      },
+      {
+        heading: "Shampoo/Wrap (Relaxed Hair)",
+        description1: "1 hr, 50 mins",
+        price: "$85",
+      },
+      {
+        heading: "Pony Tail",
+        description1: "2 hrs  •  Ponytail",
+        description: "Hair is NOT provided. ",
+        price: "$150",
+      },
+    ],
+  },
+
+  Color: [
+    {
+      heading: "NEW SINGLE PROCESS WITH FULL HEAD HIGHLIGHTS",
+      description1: "2 hrs, 30 mins",
+      description:
+        "This process completely changes your hair color to a brown, with a full head of blonde highlights added to create dimension. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+      price: "$495",
+    },
+  ],
+
+  // Add more subcategories as needed
 };
 
 const CategoryMenu = () => {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const [expandedSubcategory, setExpandedSubcategory] = useState(null); // State to track the expanded description
   const categoryContainerRef = useRef(null);
   const sectionRefs = useRef({});
   const fixedNavRef = useRef(null);
@@ -50,17 +160,8 @@ const CategoryMenu = () => {
     }
   };
 
-  const handleNavigation = (direction) => {
-    const currentIndex = categories.indexOf(activeCategory);
-    let newIndex;
-    if (direction === "next") {
-      newIndex = (currentIndex + 1) % categories.length;
-    } else if (direction === "previous") {
-      newIndex = (currentIndex - 1 + categories.length) % categories.length;
-    }
-    const newCategory = categories[newIndex];
-    setActiveCategory(newCategory);
-    handleCategoryClick(newCategory);
+  const toggleDescription = (index) => {
+    setExpandedSubcategory(expandedSubcategory === index ? null : index); // Toggle the description view
   };
 
   useEffect(() => {
@@ -116,13 +217,13 @@ const CategoryMenu = () => {
           </div>
           <button
             className="scroll-arrow scroll-left"
-            onClick={() => handleNavigation("previous")}
+            onClick={() => scrollCategories("left")}
           >
             &lt;
           </button>
           <button
             className="scroll-arrow scroll-right"
-            onClick={() => handleNavigation("next")}
+            onClick={() => scrollCategories("right")}
           >
             &gt;
           </button>
@@ -136,12 +237,36 @@ const CategoryMenu = () => {
             ref={(el) => (sectionRefs.current[category] = el)}
             className="category-section"
           >
-            <h2>{category}</h2>
             <div className="subcategories">
-              {subcategories[category] &&
-                subcategories[category].map((sub, idx) => (
+              {subcategories[category]?.items &&
+                subcategories[category]?.items.map((sub, idx) => (
                   <div key={idx} className="subcategory-item">
-                    {sub}
+                    <div
+                      className="subcategory-content"
+                      onClick={() => toggleDescription(idx)}
+                    >
+                      <h3 className="subcategory-heading">{sub.heading}</h3>
+                      <p className="subcategory-description1">
+                        {sub.description1}
+                      </p>
+
+                      {expandedSubcategory === idx ? (
+                        <p className="subcategory-description">
+                          {sub.description || "No description available."}
+                        </p>
+                      ) : (
+                        <p className="subcategory-description truncated">
+                          {sub.description
+                            ? sub.description
+                                .split(" ")
+                                .slice(0, 10)
+                                .join(" ") + "..."
+                            : "No description available."}
+                        </p>
+                      )}
+                      <p className="subcategory-price">{sub.price}</p>
+                    </div>
+                    <button className="add-button">+</button>
                   </div>
                 ))}
             </div>
