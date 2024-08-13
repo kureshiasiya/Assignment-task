@@ -12,7 +12,7 @@ const categories = [
   "Treatments",
 ];
 
-const subcategories = ["Subcategory 1", "Subcategory 2", "Subcategory 3"];
+const subcategories = ["Hircut", "Subcategory 2", "Subcategory 3"];
 
 const CategoryMenu = () => {
   const [activeCategory, setActiveCategory] = useState(0);

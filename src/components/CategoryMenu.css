@@ -50,7 +50,7 @@
   position: fixed;
   top: 100px; /* Positioned below the "Select Services" text */
   width: calc(100% - 30px); /* Adjusted for margin */
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
   z-index: 998;
   padding: 10px;
   border-bottom: 1px solid #ccc;
@@ -87,19 +87,19 @@
 }
 
 /* Section Styling */
-section {
+/* section {
   padding: 50px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   background-color: #f5f5f5;
-}
+} */
 
 /* Featured Section with Subcategories */
 .featured-section {
   margin-top: 20px;
   padding: 20px;
   border-top: 2px solid #ccc;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 }
 
 .featured-title {
