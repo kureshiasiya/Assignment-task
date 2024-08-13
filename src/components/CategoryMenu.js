@@ -37,10 +37,30 @@ const CategoryMenu = () => {
     });
   };
 
-  const scrollCategoriesRight = () => {
+  const scrollCategories = (direction) => {
     if (categoryContainerRef.current) {
-      categoryContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+      const container = categoryContainerRef.current;
+      const { scrollLeft, clientWidth } = container;
+
+      if (direction === "right") {
+        container.scrollBy({ left: clientWidth, behavior: "smooth" });
+      } else if (direction === "left") {
+        container.scrollBy({ left: -clientWidth, behavior: "smooth" });
+      }
     }
+  };
+
+  const handleNavigation = (direction) => {
+    const currentIndex = categories.indexOf(activeCategory);
+    let newIndex;
+    if (direction === "next") {
+      newIndex = (currentIndex + 1) % categories.length;
+    } else if (direction === "previous") {
+      newIndex = (currentIndex - 1 + categories.length) % categories.length;
+    }
+    const newCategory = categories[newIndex];
+    setActiveCategory(newCategory);
+    handleCategoryClick(newCategory);
   };
 
   useEffect(() => {
@@ -94,8 +114,17 @@ const CategoryMenu = () => {
               </button>
             ))}
           </div>
-          <button className="scroll-arrow" onClick={scrollCategoriesRight}>
-            ➔
+          <button
+            className="scroll-arrow scroll-left"
+            onClick={() => handleNavigation("previous")}
+          >
+            &lt;
+          </button>
+          <button
+            className="scroll-arrow scroll-right"
+            onClick={() => handleNavigation("next")}
+          >
+            &gt;
           </button>
         </div>
       </div>

@@ -21,13 +21,13 @@
   color: gray; /* Default color for all items */
   margin-right: 10px;
 }
+
 .service-active {
   color: black; /* Black color for the 'Services' item */
 }
 
 .top-item {
   font-weight: bold;
-  /* color: #333; */
   margin-right: 20px;
 }
 
@@ -39,6 +39,8 @@
 }
 
 .category-container-wrapper {
+  display: flex;
+  align-items: center;
   position: relative;
   overflow: hidden;
 }
@@ -48,8 +50,9 @@
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  margin-bottom: 20px;
-  padding-right: 40px; /* Space for arrow */
+  /* margin-bottom: 20px; */
+  padding-right: 60px; /* Space for arrows */
+  flex-grow: 1;
 }
 
 .category-container::-webkit-scrollbar {
@@ -64,7 +67,7 @@
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.3s;
-  font-size: 5px solid black;
+  font-size: 14px;
   border-radius: 25px;
 }
 
@@ -73,17 +76,27 @@
   color: white;
 }
 
+.scroll-container {
+  display: flex;
+  align-items: center;
+}
+
 .scroll-arrow {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  border: none;
-  font-size: 24px;
+  /* background: #f0f0f0; */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
   cursor: pointer;
-  padding: 10px;
-  box-shadow: -5px 0 5px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  user-select: none; /* Prevents text selection on click */
+}
+
+.scroll-left {
+  margin-right: 10px; /* Space between left button and category container */
+}
+
+.scroll-right {
+  margin-left: 10px; /* Space between right button and category container */
 }
 
 .content {
