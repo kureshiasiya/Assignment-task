@@ -174,3 +174,6 @@
   cursor: pointer;
   margin-left: 10px;
 }
+.subcategory-item.selected {
+  background-color: gray;
+}

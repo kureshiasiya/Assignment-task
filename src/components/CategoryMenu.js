@@ -130,7 +130,7 @@ const subcategories = {
 
 const CategoryMenu = () => {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
-  const [expandedSubcategory, setExpandedSubcategory] = useState(null); // State to track the expanded description
+  const [expandedSubcategory, setExpandedSubcategory] = useState(null);
   const categoryContainerRef = useRef(null);
   const sectionRefs = useRef({});
   const fixedNavRef = useRef(null);
@@ -161,7 +161,7 @@ const CategoryMenu = () => {
   };
 
   const toggleDescription = (index) => {
-    setExpandedSubcategory(expandedSubcategory === index ? null : index); // Toggle the description view
+    setExpandedSubcategory(expandedSubcategory === index ? null : index);
   };
 
   useEffect(() => {
@@ -237,6 +237,12 @@ const CategoryMenu = () => {
             ref={(el) => (sectionRefs.current[category] = el)}
             className="category-section"
           >
+            {/* Display the category heading here */}
+            <h2 className="category-heading">{category}</h2>
+            <p className="category-description">
+              {subcategories[category]?.heading}
+            </p>
+
             <div className="subcategories">
               {subcategories[category]?.items &&
                 subcategories[category]?.items.map((sub, idx) => (
