@@ -115,17 +115,111 @@ const subcategories = {
     ],
   },
 
-  Color: [
-    {
-      heading: "NEW SINGLE PROCESS WITH FULL HEAD HIGHLIGHTS",
-      description1: "2 hrs, 30 mins",
-      description:
-        "This process completely changes your hair color to a brown, with a full head of blonde highlights added to create dimension. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
-      price: "$495",
-    },
-  ],
+  "Color Services": {
+    heading: "",
+    items: [
+      {
+        heading: "NEW SINGLE PROCESS WITH FULL HEAD HIGHLIGHTS",
+        description1: "2 hrs, 30 mins",
+        description:
+          "This process completely changes your hair color to a brown, with a full head of blonde highlights added to create dimension. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+        price: "$495",
+      },
+      {
+        heading: "NEW FULL HEAD HIGHLIGHTS",
+        description1: "2 hrs, 30 mins",
+        description:
+          "A full head of highlights to make hair blonde, golden, or soft browns. Natural hair base color stays the same. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service).",
+        price: "$410",
+      },
+      {
+        heading: "BLONDE HIGHLIGHTS (Half Head Highlights)",
+        description1: "1hr,30 mins",
+        description:
+          "A half head of highlights to make hair blonde, golden, or softs browns. Natural hair base color stays the same. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service).",
+        price: "$175",
+      },
+      {
+        heading:
+          "LIGHT BROWN/ SOFT GOLDEN BROWN/ LIGHT ASH BROWN (Virgin Single Process w/ Few Highlights)",
+        description1: "2 hrs, 15 mins",
+        description:
+          "MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service).",
+        price: "$185",
+      },
+    ],
+  },
+  "Natural Hairstyling": {
+    heading: "",
+    items: [
+      {
+        heading: "Flexi Rod Set",
+        description1: "3 hrs",
 
-  // Add more subcategories as needed
+        price: "$125",
+      },
+      {
+        heading: "Wash & Go - Curly Style",
+        description1: "1 hr, 25 mins",
+
+        price: "$60",
+      },
+    ],
+  },
+  "Relaxer/ Texturizer/ Keratin": {
+    heading: "",
+    items: [
+      {
+        heading: "Relaxer",
+        description1: "1 hr, 25 mins",
+
+        price: "$110",
+      },
+      {
+        heading: "Relaxer and Haircut",
+        description1: "1 hr, 40 mins",
+
+        price: "$160",
+      },
+    ],
+  },
+  "Extension, Installs and Wigs": {
+    heading: "",
+    items: [
+      {
+        heading: "Install Removal",
+        description1: "1 hr, 30 mins",
+        description:
+          "ervice includes safe removal of extension hair, take down of braided foundation from weave install performed at H2 Salon. . A detox shampoo, deep conditioning treatment. Afterwards hair will be blow dried. Additional styling service must be booked if seeking any styling.",
+        price: "$100",
+      },
+      {
+        heading: "Intricate Weave Install",
+        description1: "3 hrs, 30 mins",
+
+        price: "$350",
+      },
+    ],
+  },
+  Treatments: {
+    heading: "",
+    items: [
+      {
+        heading: "Detox Shampoo",
+        description1: "20 mins",
+        description:
+          "This is an add on treatment for clients who have taken out braids or a protective style and have scalp build-up. MUST book styling or haircut service to follow. Appointments made without a styling service will be cancelled. ",
+        price: "$40",
+      },
+      {
+        heading: "Deep Condition (Standard)",
+        description1: "15 mins",
+        description:
+          "This is an add on deep conditioning treatment service for clients who need to restore moisture back into their hair. MUST book styling or haircut service to follow. Appointments made without a styling service will be cancelled. ",
+        price: "$25",
+      },
+    ],
+  },
 };
 
 const CategoryMenu = () => {
