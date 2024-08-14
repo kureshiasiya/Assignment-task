@@ -150,12 +150,12 @@ const CategoryMenu = () => {
   const scrollCategories = (direction) => {
     if (categoryContainerRef.current) {
       const container = categoryContainerRef.current;
-      const { scrollLeft, clientWidth } = container;
+      const scrollAmount = container.offsetWidth;
 
       if (direction === "right") {
-        container.scrollBy({ left: clientWidth, behavior: "smooth" });
+        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
       } else if (direction === "left") {
-        container.scrollBy({ left: -clientWidth, behavior: "smooth" });
+        container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
       }
     }
   };
